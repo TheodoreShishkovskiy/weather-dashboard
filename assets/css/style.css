@@ -1,0 +1,64 @@
+#header{
+  background-size: cover;
+  background-position-y: 41%;
+  background-color: cornsilk;
+  color: white;
+  position:relative !important;
+}
+
+#header h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 420%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+}
+
+.jumbotron {
+  padding: 1.1rem;
+  border-radius: 0;
+}
+
+#weather-search{
+  width: 75%;
+}
+
+#weather-button-icon{
+  width: 16px;
+  display: inline-block;
+}
+
+#weather-current{
+  padding-left: 16px;
+}
+
+#weather-clear{
+  color: black;
+  text-decoration: none;
+  margin: .5em 0em 0em .5em;
+  font-size: .75em;
+}
+
+#weather-card{
+  width: 9rem;
+  background-color: aqua;
+  color: white;
+  text-align: center;
+}
+
+@media only screen and (max-width: 992px) {
+  #weather-search{
+    width: 100%;
+  }
+  #weather-button{
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  #weatherForecastUl{
+    justify-content: center;
+  }
+}
