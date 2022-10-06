@@ -122,3 +122,25 @@ var renderCities = () => {
     }
   }
 }
+
+$('#weather-button').on("click", (event) => {
+event.preventDefault();
+searchedCity = $('#weather-search').val();
+showCurrentWeather(event);
+});
+
+$('#weather-results').on("click", (event) => {
+  event.preventDefault();
+  $('#weather-search').val(event.target.textContent);
+  searchedCity=$('#weather-search').val();
+  showCurrentWeather(event);
+});
+
+$('#weather-clear').on("click", (event) => {
+  localStorage.clear();
+  renderCities;
+});
+
+renderCities();
+
+showCurrentWeather();
