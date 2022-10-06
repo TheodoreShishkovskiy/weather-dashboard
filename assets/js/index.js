@@ -76,3 +76,16 @@ var getWeatherForecast = (event) => {
     $('#weather-forecast').html(weatherCurrentHTML);
   })
 }
+
+var saveCity = (differentCity) => {
+  let cityExists = false;
+  for (let i = 0; i < localStorage.length; i++) {
+    if (localStorage["cities" + i] === differentCity) {
+      cityExists = true;
+      break;
+    }
+  }
+  if (cityExists === false) {
+    localStorage.setItem('cities' + localStorage.length, newCity);
+  }
+}
