@@ -1,6 +1,6 @@
 var owmAPI = "dda279cb1f7efed58ec2990eb5510e89";
-var currentCity = "";
-var lastCity = "";
+var searchedCity = "";
+var lastSearchedCity = "";
 
 var handleErrors = (response) => {
   if (!response.ok) {
@@ -11,7 +11,7 @@ var handleErrors = (response) => {
 
 var showCurrentWeather = (event) =>{
   let city = $('weather-search').val();
-  currentCity = $('weather-search').val();
+  searchedCity = $('weather-search').val();
   let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&APPID=" + owmAPI;
   fetch(queryURL)
   .then(handleErrors)
@@ -20,7 +20,7 @@ var showCurrentWeather = (event) =>{
 })
 .then((response) => {
     saveCity(city);
-    $('weather-error').text("");
+    $('#weather-error').text("");
     let weatherIcon="https://openweathermap.org/img/w/" + response.weather[0].icon + ".png";
     let currentTime = response.dt;
     let currentTimeZone = response.timezone;
@@ -36,7 +36,7 @@ var showCurrentWeather = (event) =>{
       <li>Humidity: ${response.main.humidity}%</li>
       <li>Wind Speed: ${response.wind.speed} MPH</li>
     </ul>`;
-  $('weather-current').html(weatherCurrentHTML);
+  $('#weather-current').html(weatherCurrentHTML);
   })
 }
 
@@ -87,5 +87,38 @@ var saveCity = (differentCity) => {
   }
   if (cityExists === false) {
     localStorage.setItem('cities' + localStorage.length, newCity);
+  }
+}
+
+var renderCities = () => {
+  $('#weather-results').empty();
+  if (localStorage.length===0){
+    if (lastSearchedCity){
+      $('#weather-search').attr("value", lastSearchedCity);     
+    } else {
+      $('#weather-search').attr("value", "Charlotte");
+    }
+  } else {
+    let cityKey = "cities"+(localStorage.length-1);
+    lastSearchedCity = localStorage.getItem(cityKey);
+    $('#weather-search').attr("value", lastSearchedCity);
+    for (let i = 0; i < localStorage.length; i++) {
+      let city = localStorage.getItem("cities" + i);
+      let cityElement;
+      if (searchedCity===""){
+        searchedCity=lastSearchedCity;
+      }
+      if (city === searchedCity) {
+        cityElement = `<button type="button" class="list-group-item list-group-item-action active">${city}</button></li>`;
+      } else {
+          cityEl = `<button type="button" class="list-group-item list-group-item-action">${city}</button></li>`;
+      }
+      $('#weather-results').prepend(cityElement);
+    }
+    if (localStorage.length>0) {
+      $('#weather-clear').html($('<a id="weather=clear" href="#">clear</a>'));
+    } else {
+      $('#weather-clear').html('');
+    }
   }
 }
