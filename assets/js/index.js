@@ -1,6 +1,10 @@
+// global variables used further in the funnctions
+// OpenWeatherMap API code is included on the first line of this index.js
 var owmAPI = "dda279cb1f7efed58ec2990eb5510e89";
 var searchedCity = "";
 var lastSearchedCity = "";
+
+// This function is added to handle any errors that may occur within the js
 
 var handleErrors = (response) => {
   if (!response.ok) {
@@ -8,6 +12,8 @@ var handleErrors = (response) => {
   }
   return response;
 }
+
+// Function built to use the owmAPI and return the weather/timezone and save it into json
 
 var showCurrentWeather = (event) =>{
   let city = $('weather-search').val();
@@ -33,12 +39,15 @@ var showCurrentWeather = (event) =>{
     <h3>${response.name} ${currentMoment.format("(MM/DD/YY)")} <img src="${weatherIcon}"></h3>
     <ul class="list-unstyled">
       <li>Temperature: ${response.main.temp}&#8457;</li>
-      <li>Humidity: ${response.main.humidity}%</li>
       <li>Wind Speed: ${response.wind.speed} MPH</li>
+      <li>Humidity: ${response.main.humidity}%</li>
     </ul>`;
   $('#weather-current').html(weatherCurrentHTML);
   })
 }
+
+// This allows the user to search up any city on the webpage and be able to see the five day forecast as displayed
+// All weather info comes from the owmAPI meanwhile the time comes from the this moment function
 
 var getWeatherForecast = (event) => {
   let city = $('#weather-search').val();
@@ -56,26 +65,30 @@ var getWeatherForecast = (event) => {
       let dailyData = response.list[i];
       let dailyTime = dailyData.dt;
       let timeZone = response.city.timezone;
-      let timeZoneHours = timeZone / 60 / 60;
+      let timeZoneHours = timeZone / 3600;
       let thisMomemnt = moment.unix(dailyTime).utc().utcOffset(timeZoneHours)
       let iconURL = "https://openweathermap.org/img/w/" + dayData.weather[0].icon + ".png";
-      if (thisMomemnt.format("HH:mm:ss") === "11:00:00" || thisMoment.format("HH:mm:ss") === "12:00:00" || thisMoment.format("HH:mm:ss") === "13:00:00") {
-        weatherCurrentHTML += `
-        <main class="weather-card card m-2 p0">
-          <ul class="list-unstyled p-3">
-            <li>${thisMoment.format("MM/DD/YY")}</li>
-            <li class="weather-icon"><img src="${iconURL}"></li>
-            <li>Temp: ${dayData.main.temp}&#8457;</li>
-            <br>
-            <li>Humidity: ${dayData.main.humidity}%</li>
-          </ul>
-        </main>`;
-      }
+        if (thisMomemnt.format("HH:mm:ss") === "11:00:00" || thisMoment.format("HH:mm:ss") === "12:00:00" || thisMoment.format("HH:mm:ss") === "13:00:00") {
+          weatherCurrentHTML += `
+          <main class="weather-card card m-2 p0">
+            <ul class="list-unstyled p-3">
+              <li>${thisMoment.format("MM/DD/YY")}</li>
+              <br>
+              <li class="weather-icon"><img src="${iconURL}"></li>
+              <br>
+              <li>Temp: ${dailyData.main.temp}&#8457;</li>
+              <br>
+              <li>Humidity: ${dailyData.main.humidity}%</li>
+            </ul>
+          </main>`;
+        }
     }
     weatherCurrentHTML += `</main>`;
     $('#weather-forecast').html(weatherCurrentHTML);
   })
 }
+
+// This function should save the searched cities into localStorage
 
 var saveCity = (differentCity) => {
   let cityExists = false;
@@ -89,6 +102,9 @@ var saveCity = (differentCity) => {
     localStorage.setItem('cities' + localStorage.length, newCity);
   }
 }
+
+// a function added to render the cities that are searched and will research the last city if the newly searched one does not appear
+// The default city for the webpage is set to Charlotte (in most cases should be Charlotte, NC)
 
 var renderCities = () => {
   $('#weather-results').empty();
@@ -123,6 +139,8 @@ var renderCities = () => {
   }
 }
 
+// On-click functions added so that when the search button is pressed the city value is entered into the API and the owmAPI should give the weather details of searched city
+
 $('#weather-button').on("click", (event) => {
 event.preventDefault();
 searchedCity = $('#weather-search').val();
@@ -140,6 +158,8 @@ $('#weather-clear').on("click", (event) => {
   localStorage.clear();
   renderCities;
 });
+
+// last two call in order for the js to function with the rest of the application
 
 renderCities();
 

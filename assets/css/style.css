@@ -1,3 +1,5 @@
+
+/* This is most of the stylng for the HTML file, set to make the website look more accesible */
 #header{
   background-size: cover;
   background-position-y: 41%;
@@ -34,6 +36,8 @@
   padding-left: 16px;
 }
 
+/* A few css editors to handle how the js will be edited */
+
 #weather-clear{
   color: black;
   text-decoration: none;
@@ -47,6 +51,8 @@
   color: white;
   text-align: center;
 }
+
+/* Media sizing css added so that the webpage will display correctly on smaller and bigger screens */
 
 @media only screen and (max-width: 992px) {
   #weather-search{
