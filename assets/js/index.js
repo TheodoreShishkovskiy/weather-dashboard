@@ -16,3 +16,15 @@ $(".subtitle").attr("style", "display:inline")
 
 addInfo(searchedCity)
 };
+
+// These two will add event listeners to the search and its history
+// Search History
+$(".history").on('click', function(event){ 
+  event.preventDefault();
+  $(".subtitle").attr("style", "display: inline")
+  document.getElementById("userEntry").value = event.target.id;
+  getWeather();
+})
+// Search Button
+document.getElementById("searchButton").addEventListener('click', findWeather);
+document.getElementById("searchButton").addEventListener('click', getWeather);
