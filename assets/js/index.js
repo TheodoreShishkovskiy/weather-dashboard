@@ -1,6 +1,6 @@
 // global variables used further in the funnctions
 // OpenWeatherMap API code is included on the first line of this index.js
-var owmAPI = "dda279cb1f7efed58ec2990eb5510e89";
+var owmAPI = "788d5638d7c8e354a162d6c9747d1bdf";
 var searchedCity = "";
 var lastSearchedCity = "";
 
@@ -18,7 +18,7 @@ var handleErrors = (response) => {
 var showCurrentWeather = (event) =>{
   let city = $('weather-search').val();
   searchedCity = $('weather-search').val();
-  let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&APPID=" + owmAPI;
+  let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + owmAPI;
   fetch(queryURL)
   .then(handleErrors)
   .then((response) => {
@@ -51,7 +51,7 @@ var showCurrentWeather = (event) =>{
 
 var getWeatherForecast = (event) => {
   let city = $('#weather-search').val();
-  let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + "&APPID=" + owmAPI;
+  let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial" + "&=" + owmAPI;
   fetch(queryURL)
   .then(handleErrors)
   .then((response) => {
