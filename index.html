@@ -20,15 +20,23 @@
 
   <!-- The start of the main content and works with js to create a search for the city names -->
   <main class = "flex-row justify-space-between">
+<!-- This will display the search bar on the left of the dashboard -->
    <section class = "col-12 col-sm-12 cold-md-4 float-left">
     <section class = "box">
-      <h3 class = "box=header text-uppercase">Search Here for city:</h3>
+      <h3 class = "box=header">Search Here for city:</h3>
       <section id = "form" class = "card-body">
         <input type = "text" id = "userEntry" placeholder = "Search a city!"/>
         <button class = "btn" id = "searchButton">Search Here:</button>
       </section>
     </section>
-   </section>
+    <!-- Created in order to display the recent search history -->
+    <section class = "card history">
+      <h3 class = "card-header">Recent Searches</h3>
+    </section>
+  </section>
+  
+
+
   </main>
 
   <!-- Scripts added from Jquery, BootStrap and moment.js -->
