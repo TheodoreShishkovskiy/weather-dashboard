@@ -5,7 +5,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>  <script src="https://kit.fontawesome.com/b690004593.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  <script src="https://kit.fontawesome.com/b690004593.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./assets/css/style.css">
   <title> A Weather Dashboard</title>
 </head>
@@ -21,7 +22,7 @@
   <!-- The start of the main content and works with js to create a search for the city names -->
   <main class = "flex-row justify-space-between">
 <!-- This will display the search bar on the left of the dashboard -->
-   <section class = "col-12 col-sm-12 cold-md-4 float-left">
+    <section class = "col-12 col-sm-12 cold-md-4 float-left">
     <section class = "box">
       <h3 class = "box=header">Search Here for city:</h3>
       <section id = "form" class = "card-body">
@@ -33,10 +34,22 @@
     <section class = "card history">
       <h3 class = "card-header">Recent Searches</h3>
     </section>
-  </section>
-  
+    </section>
 
-
+    <!-- Displays all content on the right of the dashboard -->
+    <!-- The current weather display -->
+    <section class = "col-12 col-md-8 col-sm-12 float-right">
+      <section>
+        <h2 class = "subtitle">The Weather Today:</h2>
+        <section class="city"></section>     
+      </section>
+      <!-- The 5 day forecast display -->
+      <section>
+        <h2 class = "subtitle">This Week's Forecast:</h2>
+        <section class = "five-day"></section>
+      </section>
+    </section>
+      
   </main>
 
   <!-- Scripts added from Jquery, BootStrap and moment.js -->
