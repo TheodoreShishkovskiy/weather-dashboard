@@ -60,7 +60,7 @@ $(".city").append(humidity)
 $(".city").append(uvIndex)
 
 // Introducing the API information into the function
-var geoURL = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityLocation + "," + countryLocation + "&limit=5&appid=dda279cb1f7efed58ec2990eb5510e89"
+var geoURL = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityLocation + "," + countryLocation + "&limit=5&appid=b38f9c4580f09f982820d3be56b001de"
 fetch(geoURL)
   .then(function (response) {
     return response.json();
@@ -68,7 +68,7 @@ fetch(geoURL)
   .then(function (data){
     longitude = data[0].lon;
     latitude = data[0].lat;
-    var forecastURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + "&lon=" + longitude + "&exclude=minutely,hourly,alerts&units=imperial&appid=dda279cb1f7efed58ec2990eb5510e89";
+    var forecastURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + "&lon=" + longitude + "&exclude=minutely,hourly,alerts&units=imperial&appid=b38f9c4580f09f982820d3be56b001de";
     fetch(forecastURL)
       .then(function (response) {
         return response.json();
