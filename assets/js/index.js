@@ -13,8 +13,7 @@ if ( searchHistory.includes(searchedCity) === false){
   $(".history").append(findCity)
 }
 $(".subtitle").attr("style", "display:inline")
-
-addInfo(searchedCity)
+addInfo(searchedCity);
 };
 
 // These two will add event listeners to the search and its history
@@ -131,3 +130,37 @@ fetch(geoURL)
   })
 }
 
+// Next few functions will store/add info to local storage
+function getInfo() {
+  var list = localStorage.getItem("city");
+  if (list !== null){
+    newList = JSON.parse(list);
+    return newList;
+  } else {
+    newList = [];
+  }
+  return newList
+}
+
+function addInfo (n) {
+  var addList = getInfo();
+  if (searchHistory.includes(searchedCity) === false){
+    addList.push(n);
+  }
+  localStorage.setItem("city", JSON.stringify(addList));
+};
+
+// Function created to render recent history
+function renderInfo() {
+  var searchHistory = getInfo();
+  for (var i = 0; i < searchHistory.length; i++){
+    var searchedCity = searchHistory[i];
+    var findCity = $("<section>")
+    findCity.attr('id', searchedCity)
+    findCity.text(searchedCity)
+    findCity.addClass("h4")
+    $(".history").append(findCity)
+  }
+};
+
+renderInfo();
