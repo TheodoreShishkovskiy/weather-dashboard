@@ -24,7 +24,7 @@ $(".history").on('click', function(event){
   $(".subtitle").attr("style", "display: inline")
   document.getElementById("userEntry").value = event.target.id;
   getWeather();
-})
+});
 // Search Button
 document.getElementById("searchButton").addEventListener('click', findWeather);
 document.getElementById("searchButton").addEventListener('click', getWeather);
@@ -33,7 +33,7 @@ document.getElementById("searchButton").addEventListener('click', getWeather);
 
 function getWeather(){
   $(".five-day").empty();
-  $(".city").empty();
+  $(".city").empty()
   searchedCity = document.getElementById("userEntry").value;
   // Setting all the variables for the rest of the funtion
   var countryLocation = "US";
@@ -42,19 +42,19 @@ function getWeather(){
   var latitude;
   var cityChosen = $("<h>")
   cityChosen.addClass("h3")
-  var temperature = $("<section>")
+  var temp = $("<section>")
   var humidity = $("<section>")
   var wind = $("<section>")
   var uvIndex = $("<section>")
   var icon = $("<img>")
   icon.addClass("icon");
-  var weatherDate = ("<section>")
+  var dateTime = ("<section>")
 // Appending all the data into the html
 $(".city").addClass("list-group")
 $(".city").append(cityChosen)
-$(".city").append(weatherDate)
+$(".city").append(dateTime)
 $(".city").append(icon)
-$(".city").append(temperature)
+$(".city").append(temp)
 $(".city").append(wind)
 $(".city").append(humidity)
 $(".city").append(uvIndex)
@@ -68,7 +68,7 @@ fetch(geoURL)
   .then(function (data){
     longitude = data[0].lon;
     latitude = data[0].lat;
-    var forecastURL = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + "&lon=" + longitude + "&exclude=minutely,hourly,alerts&units=imperial&appid=b38f9c4580f09f982820d3be56b001de";
+    var forecastURL = 'https://api.openweathermap.org/data/3.0/onecall?lat=' + latitude + "&lon=" + longitude + "&exclude=minutely,hourly,alerts&units=imperial&appid=b38f9c4580f09f982820d3be56b001de";
     fetch(forecastURL)
       .then(function (response) {
         return response.json();
@@ -78,9 +78,10 @@ fetch(geoURL)
         imgAPI = "https://openweathermap.org/img/wn/" + forecastIcon + ".png";
         icon.attr('src', imgAPI)
         cityChosen.text(cityLocation);
-        var date = new Date(data.current.dt *1000);
-        weatherDate.text("[" + (date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear() + "]");
-        temperature.text("Temperature: " + data.current.temperature + "F");
+        var date = new Date(data.current.dt * 1000);
+        dateTime.text("("+ (date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear() + ")");
+        
+        temp.text("Temperature: " + data.current.temp + "F");
         humidity.text("Humidity " + data.current.humidity + "%");
         wind.text("Wind Speed: " + data.current.wind_speed + "mph");
         
@@ -110,8 +111,8 @@ fetch(geoURL)
           this["futureWind" + i] = $("<section>")
           this["futureHumidity" + i] = $("<section>")
           this["forecastDay" + i] = new Date(data.daily[i].dt *1000);
-          (this["futureDate" + i]).text(((this["forecastDate" + i]).getMonth() + 1) + "/" + (this["forecastDate" + i]).getFullYear());
-          (this["futureTemp" + i]).text("Temperature: " + data.daily[i].temperature.day + "F");
+          (this["futureDate"+i]).text(((this["forecastDay"+i]).getMonth()+1) + "/" + (this["forecastDay"+i]).getDate() + "/" + (this["forecastDay"+i]).getFullYear());
+          (this["futureTemp" + i]).text("Temperature: " + data.daily[i].temp.day + "F");
           (this["futureWind" + i]).text("Wind Speed: " + data.daily[i].wind_speed + "mph");
           (this["futureHumidity" + i]).text("Humidity: " + data.daily[i].humidity + "%");
           (this["forecastIcon" + i]) = data.daily[i].weather[0].icon;
@@ -139,7 +140,7 @@ function getInfo() {
   } else {
     newList = [];
   }
-  return newList
+  return newList;
 }
 
 function addInfo (n) {
